@@ -1,0 +1,8 @@
+comment "rpboot needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
+
+config BR2_PACKAGE_RPBOOT
+	bool "rpboot"
+	depends on BR2_LINUX_KERNEL
+	help
+	  the rpboot driver is used to boot the ducati processor.

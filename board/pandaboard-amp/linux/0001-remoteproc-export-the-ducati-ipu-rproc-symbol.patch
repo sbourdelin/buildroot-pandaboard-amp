@@ -1,0 +1,47 @@
+From a6533810390db18b1249a4db7864c0b7636d6463 Mon Sep 17 00:00:00 2001
+From: Sebastien Bourdelin <sebastien.bourdelin@savoirfairelinux.com>
+Date: Tue, 23 Feb 2016 12:14:45 -0500
+Subject: [PATCH 1/1] remoteproc: export the ducati ipu rproc symbol
+
+This is a dirty hack to easily access the ipu rproc from others drivers.
+Investigating the rproc_get_by_phandle() function which use the device
+tree could offer a neater alternative to this hack.
+
+Signed-off-by: Sebastien Bourdelin <sebastien.bourdelin@savoirfairelinux.com>
+---
+ drivers/remoteproc/omap_remoteproc.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/drivers/remoteproc/omap_remoteproc.c b/drivers/remoteproc/omap_remoteproc.c
+index b43c4f6..04a2a48 100644
+--- a/drivers/remoteproc/omap_remoteproc.c
++++ b/drivers/remoteproc/omap_remoteproc.c
+@@ -40,6 +40,8 @@
+ #include "omap_remoteproc.h"
+ #include "remoteproc_internal.h"
+ 
++struct rproc *ducati_rproc = NULL;
++
+ /**
+  * struct omap_rproc_boot_data - boot data structure for the DSP omap rprocs
+  * @syscon: regmap handle for the system control configuration module
+@@ -690,6 +692,8 @@ static int omap_rproc_probe(struct platform_device *pdev)
+ 
+ 	platform_set_drvdata(pdev, rproc);
+ 
++	ducati_rproc = rproc;
++
+ 	ret = rproc_add(rproc);
+ 	if (ret)
+ 		goto release_mem;
+@@ -705,6 +709,7 @@ free_rproc:
+ 	rproc_put(rproc);
+ 	return ret;
+ }
++EXPORT_SYMBOL(ducati_rproc);
+ 
+ static int omap_rproc_remove(struct platform_device *pdev)
+ {
+-- 
+2.7.1
+
