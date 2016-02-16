@@ -1,1 +1,2 @@
 source "package/pandaboard-amp/rpboot/Config.in"
+source "package/pandaboard-amp/rpgpio/Config.in"

@@ -1,0 +1,8 @@
+comment "rpgpio needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL
+
+config BR2_PACKAGE_RPGPIO
+	bool "rpgpio"
+	depends on BR2_LINUX_KERNEL
+	help
+	  A simple driver used to request an IRQ on a GPIO and toggle an other GPIO in the interupt handler.
