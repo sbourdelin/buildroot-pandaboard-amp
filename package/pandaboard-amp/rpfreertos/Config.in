@@ -1,0 +1,16 @@
+config BR2_PACKAGE_RPFREERTOS
+	bool "rpfreertos"
+	help
+	  the rpfreertos package build a demo FreeRTOS firmware compliant
+	  with the Linux remoteproc framework.
+
+if BR2_PACKAGE_RPFREERTOS
+
+config BR2_PACKAGE_RPFREERTOS_TOOLCHAIN
+	string "path to the ARM Cortex M toolchain to use?"
+	default "/path/to/arm-none-eabi/bin/arm-none-eabi-"
+	help
+	  the rpfreertos package need a toolchain for ARM Cortex M serie
+	  you can download one from https://launchpad.net/gcc-arm-embedded
+
+endif # BR2_PACKAGE_RPFREERTOS
